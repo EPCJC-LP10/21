@@ -9,26 +9,26 @@
 
 def menu():
     print
-    print "1: Inserir novo livro"
-    print "2: Listar todos os livros"
-    print "3: Pesquisar livro por código"
-    print "4: Alterar dados de um livro"
-    print "5: Eliminar livro"
+    print "1: Inserir novo contacto"
+    print "2: Listar todos os contactos"
+    print "3: Pesquisar contacto por código"
+    print "4: Alterar dados de um contacto"
+    print "5: Eliminar contacto"
     
     print "0: Terminar"
     print
 
-def posicao_livro(codigo):
-    ''' Encontra a posicao onde se encontra o livro com o código recebido
+def posicao_contacto(codigo):
+    ''' Encontra a posicao onde se encontra o contacto com o código recebido
     
-        Pesquisa por um código de livro nos livros
+        Pesquisa por um código de contacto nos contactos
         já inseridos. Se NÃO encontra o código, devolve o valor -1; 
-        caso contrário, devolve a posicão do livro dentro da lista
+        caso contrário, devolve a posicão do contacto dentro da lista
         
     '''
     
-    for pos in range(len(Livros)):
-        if Livros[pos].codigo == codigo:
+    for pos in range(len(contacto)):
+        if contacto[pos].codigo == codigo:
             return pos
                     
     return -1   # não encontrou
@@ -37,109 +37,107 @@ def posicao_livro(codigo):
 
 def inserir():
     codigo = input("Introduza código: ")
-    posicao = posicao_livro(codigo)
+    posicao = posicao_contacto(codigo)
     if posicao != -1:
         print("Código já existente.\n")
         return
     
     # ler os restantes dados do registo
-    titulo = raw_input("Introduza titulo: ")
-    ano = raw_input("Ano de lançamento: ")
-    autor = raw_input("Introduza autor: ")
+    nome = raw_input("Introduza o nome: ")
+    numero = raw_input("Numero: ")
+   
     
     
     # Criar o novo registo
-    novo_registo = Livro(codigo, titulo, ano, autor)
+    novo_registo = contacto(codigo, nome, numero,)
 
     # Adicionar o registo à lista 
-    Livros.append(novo_registo)
+    contacto.append(novo_registo)
     
     
 def apresentar_registo(registo):
         print "Código: ", registo.codigo
-        print "Titulo: ", registo.titulo
-        print "   Ano: ", registo.ano
-        print " Autor: ", registo.autor
+        print "Nome: ", registo.nome
+        print " numero: ", registo.numero
         print "-------------------------------"
 
 
 def listar_todos():
-    if len(Livros) == 0:
-        print "Não existem livros inseridos"
+    if len(contacto) == 0:
+        print "Não existem contactos inseridos"
         return
 
-    for registo in Livros:
+    for registo in contacto:
         apresentar_registo(registo)
         
 
 #Outra maneira de fazer a listagem
 def listar_todos_alternativa():
-    if len(Livros) == 0:
-        print "Não existem livros inseridos"
+    if len(contacto) == 0:
+        print "Não existem contactos inseridos"
         return
 
-    for i in range(len(Livros)):
-        apresentar_registo(Livros[i])
+    for i in range(len(contacto)):
+        apresentar_registo(contacto[i])
 
 
 
 def pesquisar():
-    codigo = input("Introduza código do livro: ")
-    posicao = posicao_livro(codigo)
+    codigo = input("Introduza código do contacto: ")
+    posicao = posicao_contacto(codigo)
     if posicao == -1:
         print "Esse código não existe."
         return
 
-    apresentar_registo(Livros[posicao])
+    apresentar_registo(contacto[posicao])
     
 def alterar():
-    codigo = input("Introduza código do livro: ")
-    posicao = posicao_livro(codigo)
+    codigo = input("Introduza numero do contacto: ")
+    posicao = posicao_contacto(codigo)
     if posicao == -1:
         print "Esse código não existe."
         return
 
-    apresentar_registo(Livros[posicao])
+    apresentar_registo(contacto[posicao])
 
     # A melhorar: perguntar qual o campo que se pretende alterar
     # Assim altera todos os campos com exceção do código
 
     #ler os novos dados
-    novo_titulo = raw_input("Introduza novo titulo: ")
-    novo_ano = raw_input("Novo ano de lançamento: ")
-    novo_autor = raw_input("Introduza novo autor: ")
-    
+    novo_nome = raw_input("Introduza novo nome: ")
+    novo_numero = raw_input("Novo numero: ")
+
 
     # Substituir o registo
-    Livros[posicao] = Livros[posicao]._replace(titulo=novo_titulo, 
-    	ano=novo_ano, autor=novo_ano)
+    contacto[posicao] = contacto[posicao]._replace(nome=novo_nome, 
+    	numero=novo_numero)
 
     
     
 def eliminar():
-    codigo = input("Introduza código do livro: ")
-    posicao = posicao_livro(codigo)
+    codigo = input("Introduza o contacto: ")
+    posicao = posicao_contacto(codigo)
     if posicao == -1:
-        print "Esse código não existe."
+        print "Esse contacto não existe."
         return
 
-    apresentar_registo(Livros[posicao])
-    opcao = raw_input("Tem a certeza que deseja eliminar este registo (S/N)? ")
+    apresentar_registo(contacto[posicao])
+    opcao = raw_input("Tem a certeza que deseja eliminar este contacto (S/N)? ")
     if opcao.lower() == "s":
         #eliminar registo na posição posicao
-        Livros.pop(posicao)
-        print "Registo eliminado"
+        contacto.pop(posicao)
+        print "contacto eliminado"
     else:
-        print "Registo não eliminado"
+        print "contacto não eliminado"
 
 
 ##################################
 
 from collections import namedtuple
 
-Livro = namedtuple("Livro", "codigo, titulo, ano, autor")
+contacto = namedtuple("contacto", "codigo, nome, numero")
 
-Livros = []
+contacto = []
 	
 quero_sair = False
 while not quero_sair:
@@ -159,6 +157,3 @@ while not quero_sair:
         quero_sair = True
     else:
 		print "Opção inválida"
-        
-print 
-
