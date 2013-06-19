@@ -20,38 +20,22 @@ def encontrar_posicao(codigo):
     return pos
 
 
-def inserir_cliente():
-    cod = input("Qual o nome do cliente? ")
-
-    pos = encontrar_posicao(cod)
-
-    if pos >= 0:
-        print "Cliente já existente"
-        return
-
-    #ler dados
-    nome = raw_input("Qual o nome do cliente? ")
-    
-    registo = oficinaReg(clientes, veiculos,serviços)
-    oficinaAlunos.append(registo)
-
-
-def pesquisar_cliente():
-    cod = input("Qual o nome do cliente? ")
+def pesquisar_serviço():
+    cod = input("Qual o serviço a utilizar? ")
 
     pos = encontrar_posicao(cod)
 
     if pos == -1:
-        print "Não existe cliente com esse nome"
+        print "Não existe esse serviço"
         return
 
-    print "Nome: ", listaoficina[pos].nome
+    print "Serviço: ", listaoficina[pos].nome
     
 
 
-def listar_clientes():
-    for i in range (len(listaclientes)):
-        print "Nome: ", listaclientes[i].nome
+def listar_serviço():
+    for i in range (len(listaofcina)):
+        print "Nome: ", listaoficina[i].nome
         
   
 
@@ -109,12 +93,6 @@ def gerir():
 
 if __name__ == "__main__":
     print "Este programa não deve ser executado diretamente"
-
-
-
-
-
-
 
 
 

@@ -2,6 +2,7 @@
 
 import menu
 import clientes
+import veiculo
 import util
 
 
