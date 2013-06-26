@@ -2,22 +2,28 @@
 
 import menu
 import clientes
-import veiculo
+import veiculos
+import servicos
 import util
 
 
 # nome dos ficheiros
-fxAlunos = "fxAlunos.dat"
+fxClientes = "fxClientes.dat"
+fxVeiculos = "fxVeiculos.dat"
+fxServicos = "fxServicos.dat"
+
 
 def ler_ficheiros():
-	# adicionar todos ficheiros a ler
-	clientes.listaAlunos = util.ler_ficheiro(fxAlunos)
-
+    # adicionar todos ficheiros a ler
+    clientes.listaClientes = util.ler_ficheiro(fxClientes)
+    veiculos.listaVeiculos = util.ler_ficheiro(fxVeiculos)
+    servicos.listaServicos = util.ler_ficheiro(fxServicos)
 
 def escrever_ficheiros():
-	# adicionar todos ficheiros a guardar
-	util.escrever_ficheiro(fxAlunos, clientes.listaAlunos)
-
+    # adicionar todos ficheiros a guardar
+    util.escrever_ficheiro(fxClientes, clientes.listaClientes)
+    util.escrever_ficheiro(fxVeiculos, veiculos.listaVeiculos)
+    util.escrever_ficheiro(fxServicos, servicos.listaServicos)
 
 
 # Bloco Principal
@@ -31,7 +37,10 @@ while not terminar:
     if op == '1':
         clientes.gerir()
     elif op == '2':
-        pass    #por fazer
+        veiculos.gerir()
+    elif op == '3':
+        servicos.gerir()
+        
     elif op == '0':
         terminar = True
 

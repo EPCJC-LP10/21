@@ -5,15 +5,15 @@ from collections import namedtuple
 import menu
 
 
-oficinaReg = namedtuple("oficinaReg", "clientes0, veiculos,serviços")
-listaoficina = []
+veiculoReg = namedtuple("veiculosReg", "matricula, marca")
+listaVeiculos = []
 
 
 
 def encontrar_posicao(codigo):
     pos = -1
-    for i in range (len(listaoficina)):
-        if listaoficina[i].id == codigo:
+    for i in range (len(listaVeiculos)):
+        if listaVeiculos[i].id == codigo:
             pos = i
             break
                             
@@ -22,58 +22,58 @@ def encontrar_posicao(codigo):
 
 def inserir_veiculo():
     marca = raw_input("Qual a marca do veiculo? ")
-    matr = input ("Qual a matricula do veiculo?")
-    pos = encontrar_posicao(marca,matr)
+    matr = raw_input ("Qual a matricula do veiculo?")
+    pos = encontrar_posicao(matr)
 
     if pos >= 0:
-        print "Veículo já existe"
+        print "Veiculo ja existe"
         return
 
     #ler dados
-    marca = raw_input("Qual a marca do veículo? ")
-    matri = raw_input ("Qual a matricula do veículo?)
-    registo = oficinaReg(cod, matri)
-    listaoficina.append(registo)
+    marca = raw_input("Qual a marca do veiculo? ")
+    matri = raw_input ("Qual a matricula do veiculo? ")
+    registo = veiculosReg(marca, matri)
+    listaVeiculo.append(registo)
 
 
 def pesquisar_veiculo():
-    marca = input("Qual a marca veículo a pesquisar? ")
-    matr = input("Qual a matricula do veículo?")
+    marca = input("Qual a marca veiculo a pesquisar? ")
+    matr = input("Qual a matricula do veiculo?")
 
-    pos = encontrar_posicao(cod)
+    pos = encontrar_posicao(marca,matr)
 
     if pos == -1:
-        print "Veículo nao existente"
+        print "Veiculo nao existente"
         return
 
-    print "Marca: ", listaoficina[pos].id
-    print "Matricula: ", listaoficna[pos].nome
+    print "Marca: ", listaVeiculos[pos].id
+    print "Matricula: ", listaVeiculos[pos].nome
     
 
 
 def listar_veiculo():
-    for i in range (len(listaoficina)):
-        print "Marca: ", listaoficina[i].id
-        print "Matricula: ", listaoficina[i].no
+    for i in range (len(listaVeiculos)):
+        print "Marca: ", listaVeiculos[i].id
+        print "Matricula: ", listaVeiculos[i].no
         
   
 
 def eliminar_veiculo():
-    cod = input ("Matricula do carro a eliminar --> ")
-    pos = encontrar_posicao(cod)
+    matr = input ("Matricula do carro a eliminar --> ")
+    pos = encontrar_posicao(matr)
 
     if pos == -1:
         print "Não existe nenhum veículo com esta matricula"
         return
 
     # TODO: Confirmar eliminação
-    listaoficina.pop(pos)
+    listaVeiculos.pop(pos)
 
 
     
 def alterar_veiculo():
-    cod = input ("Matricula do veículo a alterar --> ")
-    pos = encontrar_posicao(cod)
+    matr = input ("Matricula do veículo a alterar --> ")
+    pos = encontrar_posicao(matr)
 
     if pos == -1:
         print "Não existe veículço com esta matricula"
@@ -81,7 +81,7 @@ def alterar_veiculo():
 
     # só altera o nome
     novonome = raw_input("Qual a matricula? ")
-    listaoficina[pos] = listaoficina[pos]._replace(nome=novonome)
+    listaVeiculos[pos] = listaVeiculos[pos]._replace(nome=novonome)
 
 
 
@@ -92,7 +92,7 @@ def gerir():
     terminar = False
 
     while not terminar:
-        op = menu.veiculo()
+        op = menu.veiculos()
 
         if op == '1':
             inserir_veiculo()

@@ -5,22 +5,22 @@ from collections import namedtuple
 import menu
 
 
-servicoReg = namedtuple("servicoReg", " lavagem,revisao,mudanca do oleo,alinhamento direcao,teste a bateria")
-listaserviço = []
+servicosReg = namedtuple("servicosReg", " lavagem,revisao,mudanca do oleo,alinhamento direcao,teste a bateria")
+listaservicos = []
 
 
 
 def encontrar_posicao(codigo):
     pos = -1
-    for i in range (len(listaservico)):
-        if listaservico[i].id == codigo:
+    for i in range (len(listaservicos)):
+        if listaservicos[i].id == codigo:
             pos = i
             break
                             
     return pos
 
 
-def pesquisar_serviço():
+def pesquisar_servicos():
     ser = input("Qual o serviço a utilizar? ")
 
     pos = encontrar_posicao(ser)
@@ -29,17 +29,17 @@ def pesquisar_serviço():
         print "Não existe esse serviço"
         return
 
-    print "Serviço: ", listaservico[pos].nome
+    print "Serviço: ", listaservicos[pos].nome
     
 
 
-def listar_serviço():
-    for i in range (len(listaservico)):
-        print "Nome: ", listaservico[i].nome
+def listar_servicos():
+    for i in range (len(listaservicos)):
+        print "Nome: ", listaservicos[i].nome
         
   
 
-def eliminar_servico():
+def eliminar_servicos():
     cod = input ("Nome do servico a eliminar --> ")
     pos = encontrar_posicao(cod)
 
@@ -48,11 +48,11 @@ def eliminar_servico():
         return
 
     # TODO: Confirmar eliminação
-    listaservico.pop(pos)
+    listaservicos.pop(pos)
 
 
     
-def alterar_servico():
+def alterar_servicos():
     ser = input ("Nome do servico a alterar --> ")
     pos = encontrar_posicao(ser)
 
@@ -62,7 +62,7 @@ def alterar_servico():
 
     # só altera o nome
     novoservico = raw_input("Qual o servico? ")
-    listaservico[pos] = listaservico[pos]._replace(servico=novoservico)
+    listaservicos[pos] = listaservicos[pos]._replace(servicos=novoservico)
 
 
 
@@ -76,15 +76,15 @@ def gerir():
         op = menu.servicos()
 
         if op == '1':
-            inserir_servico()
+            inserir_servicos()
         elif op =='2':
-            listar_servico()
+            listar_servicos()
         elif op == '3':
-            pesquisar_servico()
+            pesquisar_servicos()
         elif op == '4':
-            alterar_servico()
+            alterar_servicos()
         elif op == '5':
-            eliminar_servico()
+            eliminar_servicos()
         elif op == '0':
             terminar = True
 

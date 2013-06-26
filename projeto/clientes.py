@@ -5,82 +5,81 @@ from collections import namedtuple
 import menu
 
 
-alunoReg = namedtuple("alunoReg", "id, nome")
-listaAlunos = []
+clienteReg = namedtuple("clienteReg", "cod, nome, contato")
+listaClientes = []
 
 
 
 def encontrar_posicao(codigo):
     pos = -1
-    for i in range (len(listaAlunos)):
-        if listaAlunos[i].id == codigo:
+    for i in range (len(listaClientes)):
+        if listaClientes[i].id == codigo:
             pos = i
             break
                             
     return pos
 
 
-def inserir_aluno():
-    cod = input("Qual o codigo? ")
+def inserir_clientes():
+    cod = raw_input("Qual o nome do cliente? ")
 
     pos = encontrar_posicao(cod)
 
     if pos >= 0:
-        print "Código já existe"
+        print "Cliente já existente"
         return
 
     #ler dados
-    nome = raw_input("Qual o nome? ")
+    nome = raw_input("Qual o nome do cliente? ")
+    contato = raw_input("Introduza um contato do cliente? ")
     
-    registo = alunoReg(cod, nome)
-    listaAlunos.append(registo)
+    registo = clienteReg(cod, nome, contato)
+    listaClientes.append(registo)
 
 
-def pesquisar_aluno():
-    cod = input("Qual o codigo do aluno a pesquisar? ")
+def pesquisar_clientes():
+    nome = input("Qual o nome do cliente? ")
 
-    pos = encontrar_posicao(cod)
+    pos = encontrar_posicao(nome)
 
     if pos == -1:
-        print "Não existe aluno com esse código"
+        print "Não existe cliente com esse nome"
         return
 
-    print "Código: ", listaAlunos[pos].id
-    print "Nome: ", listaAlunos[pos].nome
+    print "Nome: ", listaClientes[pos].nome
     
 
 
-def listar_alunos():
-    for i in range (len(listaAlunos)):
-        print "Código: ", listaAlunos[i].id
-        print "Nome: ", listaAlunos[i].nome
+def listar_clientes():
+    for i in range (len(listaClientes)):
+        print "Nome: ", listaClientes[i].nome
         
   
 
-def eliminar_aluno():
-    cod = input ("Código do aluno a eliminar --> ")
-    pos = encontrar_posicao(cod)
+def eliminar_clientes():
+    nome = input ("Nome do cliente a eliminar --> ")
+    pos = encontrar_posicao(nome)
 
     if pos == -1:
-        print "Não existe aluno com esse código"
+        print "Não existe cliente com esse nome"
         return
 
     # TODO: Confirmar eliminação
-    listaAlunos.pop(pos)
+    listaClientes.pop(pos)
 
 
     
-def alterar_aluno():
-    cod = input ("Código do aluno a alterar --> ")
+def alterar_clientes():
+    cod = input ("Nome do cliente a alterar --> ")
     pos = encontrar_posicao(cod)
 
     if pos == -1:
-        print "Não existe aluno com esse código"
+        print "Não existe cliente com esse nome"
         return
 
     # só altera o nome
-    novonome = raw_input("Qual o nome? ")
-    listaAlunos[pos] = listaAlunos[pos]._replace(nome=novonome)
+    novonome = raw_input("Qual o nome do cliente? ")
+    listaClientes[pos] = listaClientes[pos]._replace(nome=novonome)
 
 
 
@@ -91,18 +90,18 @@ def gerir():
     terminar = False
 
     while not terminar:
-        op = menu.alunos()
+        op = menu.clientes()
 
         if op == '1':
-            inserir_aluno()
+            inserir_clientes()
         elif op =='2':
-            listar_alunos()
+            listar_clientes()
         elif op == '3':
-            pesquisar_aluno()
+            pesquisar_clientes()
         elif op == '4':
-            alterar_aluno()
+            alterar_clientes()
         elif op == '5':
-            eliminar_aluno()
+            eliminar_clientes()
         elif op == '0':
             terminar = True
 
